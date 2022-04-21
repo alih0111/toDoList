@@ -19,31 +19,48 @@ function addTodo(e) {
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo");
   const newTodo = `
-<li>${todoInput.value}</li>
+<li>${[todoInput.value, "-"]}</li>
 <span><i class="far fa-check-square"></i></span>
 <span><i class="far fa-trash-alt"></i></span>
 `;
   todoDiv.innerHTML = newTodo;
   // append to todoList:
   todoList.appendChild(todoDiv);
-
-  saveLocalTodos(todoInput.value);
+  saveLocalTodos(todoInput.value, "-");
   todoInput.value = "";
 }
 function checkRemove(e) {
   e.preventDefault();
   // console.log(e.target.classList);
-
   const classList = [...e.target.classList];
   const item = e.target;
   const todo = item.parentElement.parentElement;
   if (classList[1] === "fa-check-square") {
-    todo.classList.toggle("completed");
-  } 
-  else if (classList[1] === "fa-trash-alt") {
+    // todo.classList.toggle("completed");
+
+    /////////////////////////////////////////////
+    let savedTodos = localStorage.getItem("todos")
+      ? JSON.parse(localStorage.getItem("todos"))
+      : [];
+
+    removeLocalTodos(todo);
+    let savedTodos2 = localStorage.getItem("todos")
+      ? JSON.parse(localStorage.getItem("todos"))
+      : [];
+    const filteredTodos = savedTodos.filter(
+      (t) => t == todo.children[0].innerHTML
+    );
+    savedTodos2.push([filteredTodos[0][0], "+"]);
+    localStorage.setItem("todos", JSON.stringify(savedTodos2));
+    todo.remove();
+    // getLocalTodos();
+
+    /////////////////////////////////////////////
+  } else if (classList[1] === "fa-trash-alt") {
     removeLocalTodos(todo);
     todo.remove();
   }
+  location.reload();
 }
 function filterTodos(e) {
   const todos = [...todoList.childNodes];
@@ -69,11 +86,11 @@ function filterTodos(e) {
     }
   });
 }
-function saveLocalTodos(todo) {
+function saveLocalTodos(todo, sign) {
   let savedTodos = localStorage.getItem("todos")
     ? JSON.parse(localStorage.getItem("todos"))
     : [];
-  savedTodos.push(todo);
+  savedTodos.push([todo, sign]);
   localStorage.setItem("todos", JSON.stringify(savedTodos));
 }
 function getLocalTodos() {
@@ -90,6 +107,9 @@ function getLocalTodos() {
 `;
     todoDiv.innerHTML = newTodo;
     todoList.appendChild(todoDiv);
+    if (todo[1] == "+") {
+      todoDiv.classList.add("completed");
+    }
   });
 }
 function removeLocalTodos(todo) {
@@ -98,7 +118,7 @@ function removeLocalTodos(todo) {
     ? JSON.parse(localStorage.getItem("todos"))
     : [];
   const filteredTodos = savedTodos.filter(
-    (t) => t !== todo.children[0].innerHTML
+    (t) => t != todo.children[0].innerHTML
   );
   localStorage.setItem("todos", JSON.stringify(filteredTodos));
 }
