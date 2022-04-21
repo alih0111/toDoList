@@ -1,0 +1,161 @@
+@font-face {
+  font-family: vazir;
+  src: url("/font/Yekan.woff");
+  /* src: url("/font/Qs_Iranyekan_medium.ttf"); */
+  /* src: url("/font/Vazir-Medium.woff") format("woff"),
+      url("/font/Vazir-Medium.ttf") format("ttf"),
+      url("/font/Vazir-Medium.woff2") format("woff2"); */
+}
+
+* {
+  font-family: "vazir", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+:root {
+  --primaryColor: #6d28d9;
+  --secondaryColor: #ede9fe;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #7c7c7c;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+  --mainRed: #db2777;
+  --bodyColor: #f6f6f6;
+}
+
+body {
+  color: var(--mainBlack);
+  background-color: var(--bodyColor);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+header {
+  margin: 25px;
+  font-size: 10px;
+  min-height: 20vh;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+.form-container {
+  display: flex;
+  justify-content: space-between;
+}
+/* .todo-input{
+  width: 250px;
+  margin-right: 20px;
+  height: 25px;
+  box-shadow: rgba(0, 0, 0, .8);
+} */
+/* input, .filter-todos{
+  outline: 0;
+  border: 0;
+  height: 25px;
+} */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+form {
+  width: 25rem;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+form input {
+  flex: 11;
+}
+form input,
+form button {
+  border: none;
+  outline: none;
+  background-color: var(--mainWhite);
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+form button {
+  color: var(--primaryColor);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+form button:hover {
+  background-color: var(--primaryColor);
+  color: var(--mainWhite);
+}
+
+.todo {
+  background-color: var(--secondaryColor);
+  color: var(--primaryColor);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.3rem 0;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+.todo-container {
+  width: 25rem;
+}
+.todo li {
+  flex: 1;
+  color: var(--primaryColor);
+  font-weight: bold;
+}
+.todo span {
+  display: block;
+  font-size: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.fa-trash-alt {
+  color: var(--mainRed);
+}
+.fa-check-square {
+  color: var(--primaryColor);
+}
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+select {
+  border: none;
+  outline: none;
+  padding: 1rem;
+  appearance: none;
+  width: 100%;
+  font-weight: bold;
+  color: var(--primaryColor);
+}
+.select {
+  margin-left: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+  width: 10rem;
+  font-weight: bold;
+  position: relative;
+}
+.select::after {
+  content: "\25bc";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  color: var(--primaryColor);
+  pointer-events: none;
+}
